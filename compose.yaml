@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres_ultimateteam
+    environment:
+      - 'POSTGRES_DB=ultimateteam'
+      - 'POSTGRES_PASSWORD=ultimateteam'
+      - 'POSTGRES_USER=ultimateteam'
+    ports:
+      - '5432:5432'

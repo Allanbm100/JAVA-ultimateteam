@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="halloween" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+
+    <style th:if="${team?.primaryColor}">
+        .btn-team-hover {
+            color: [[${team.primaryColor}]];
+            border-color: [[${team.primaryColor}]];
+        }
+
+        .btn-team-hover:hover {
+            background-color: [[${team.primaryColor}]];
+            color: oklch(21% .006 56.043);
+            border-color: [[${team.primaryColor}]];
+        }
+    </style>
+
+    <title th:text="${team?.name} ? 'Team Profile' : 'Team not found'">Team Profile</title>
+</head>
+
+<body>
+    <main class="grid min-h-screen place-items-center">
+        <div th:if="${team}" class="max-w-md mx-auto p-4 text-center">
+
+            <div class="avatar">
+                <div class="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2 mb-4">
+                    <img th:src="${team.logoUrl}" alt="Team Logo" class="w-full h-full rounded-full" />
+                </div>
+            </div>
+
+            <h1 th:text="${team.name}" class="text-6xl font-bold mb-8"></h1>
+
+            <div class="flex justify-center gap-10 mb-8">
+                <div>
+                    <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">CATEGORIA</h3>
+                    <p th:text="${team.category}" class="text-md font-extrabold tracking-widest"></p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">CRIAÇÃO</h3>
+                    <p th:text="${#temporals.format(team.creationDate, 'dd/MM/yyyy')}" class="text-md font-extrabold tracking-widest"></p>
+                </div>
+            </div>
+
+            <div class="relative w-full border rounded-lg px-6 pb-5 mb-4" style="border-color: oklch(0.3506 0.006 56.043);">
+                <h2 class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[oklch(21%_.006_56.043)] px-4 text-xl font-bold">TREINOS</h2>
+                <div class="flex flex-col sm:flex-row justify-center gap-6 mt-6">
+                    <div>
+                        <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">DIA</h3>
+                        <p th:text="${team.trainingDay}" class="text-md font-extrabold tracking-widest"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">HORÁRIO</h3>
+                        <p th:text="${team.trainingTime}" class="text-md font-extrabold tracking-widest"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">LOCAL</h3>
+                        <p th:text="${#strings.capitalize(team.trainingLocation.toLowerCase())}" class="text-md font-extrabold tracking-widest"></p>
+                    </div>
+                </div>
+            </div>
+            <a th:href="@{'/team/edit/' + ${team.id}}" class="btn btn-outline btn-team-hover py-6 px-16 text-lg">EDITAR</a>
+        </div>
+    </main>
+</body>
