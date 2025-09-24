@@ -3,6 +3,8 @@ package br.com.fiap.ultimateteam.team;
 import br.com.fiap.ultimateteam.player.Player;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,7 +12,8 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "team")
 public class Team {
 

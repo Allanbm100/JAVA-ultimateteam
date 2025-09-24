@@ -22,18 +22,3 @@ CREATE TABLE team_player
 ALTER TABLE team_player ADD CONSTRAINT fk_tea_on_player FOREIGN KEY (player_id) REFERENCES player (id);
 
 ALTER TABLE team_player ADD CONSTRAINT fk_tea_on_team FOREIGN KEY (team_id) REFERENCES team (id);
-
-INSERT INTO player (name, uniform_number, birth_date, join_date, offensive_function, zone_function, gender)
-VALUES
-    ('Ana Clara', 7, '2000-01-15', '2023-01-20', 'Handler', 'Cup', 'Feminino'),
-    ('Bruno Rocha', 10, '1998-05-22', '2023-02-10', 'Cutter', 'Fundo', 'Masculino'),
-    ('Carlos Lima', 2, '2001-08-30', '2023-03-05', 'Indefinido', 'Asa', 'Masculino'),
-    ('Daniela Martins', 5, '1999-11-12', '2023-01-20', 'Cutter', 'Middle', 'Feminino'),
-    ('Eduardo Silva', 1, '2002-04-04', '2023-04-15', 'Handler', 'Indefinido', 'Masculino'),
-    ('Fernanda Costa', 8, '2000-09-09', '2023-03-05', 'Indefinido', 'Fundo', 'Feminino'),
-    ('Gabriel Dias', 12, '1997-03-18', '2023-02-10', 'Cutter', 'Asa', 'Masculino'),
-    ('Helena Gomes', 3, '2001-07-25', '2023-04-15', 'Handler', 'Indefinido', 'Feminino'),
-    ('Igor Souza', 9, '1998-06-01', '2023-01-20', 'Indefinido', 'Cup', 'Masculino'),
-    ('Juliana Santos', 6, '2000-02-28', '2023-03-05', 'Indefinido', 'Asa', 'Feminino'),
-    ('Lucas Pereira', 4, '1999-09-21', '2023-02-10', 'Handler', 'Cup', 'Masculino'),
-    ('Mariana Alves', 11, '2002-12-05', '2023-04-15', 'Cutter', 'Middle', 'Feminino');

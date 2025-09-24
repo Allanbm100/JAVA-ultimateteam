@@ -6,100 +6,89 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <meta charset="UTF-8">
 
-    <style th:if="${team?.primaryColor}">
-        .btn-team-hover {
-            color: [[${team.primaryColor}]];
-            border-color: [[${team.primaryColor}]];
-        }
-
-        .btn-team-hover:hover {
-            background-color: [[${team.primaryColor}]];
-            color: oklch(21% .006 56.043);
-            border-color: [[${team.primaryColor}]];
-        }
-    </style>
-
-    <title th:text="${team?.name} ? 'Edit Team Profile' : 'Team not found'">Edit Team Profile</title>
+    <title th:text="${team?.name} ? #{team.edit.title} : #{team.not-found}"></title>
 </head>
 
 <body>
-    <main class="grid min-h-screen place-items-center">
-        <div th:if="${team}" class="max-w-md mx-auto p-4">
+<div th:insert="~{_navbar :: navbar}"></div>
+<main class="min-h-screen flex justify-center pt-8">
+    <div th:if="${team}" class="max-w-md mx-auto p-4">
 
-            <h1 class="text-6xl font-bold mb-8 text-center">Editar time</h1>
+        <h1 class="text-6xl font-bold mb-8 text-center" th:text="#{team.edit.form.heading}"></h1>
 
-            <form th:action="@{/team/edit}" th:object="${team}" method="post" class="flex flex-col gap-4">
-                <input type="hidden" th:field="*{id}" />
+        <form th:action="@{/team/edit}" th:object="${team}" method="post" class="flex flex-col gap-4">
+            <input type="hidden" th:field="*{id}" />
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">NOME</span>
-                    </label>
-                    <input type="text" th:field="*{name}" placeholder="Nome do time" class="input input-bordered w-full" />
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.name}"></span>
+                </label>
+                <input type="text" th:field="*{name}" th:placeholder="#{team.edit.form.name.placeholder}" class="input input-bordered w-full" />
+            </div>
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">URL DO LOGO</span>
-                    </label>
-                    <input type="url" th:field="*{logoUrl}" placeholder="URL do logo" class="input input-bordered w-full" />
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.logo}"></span>
+                </label>
+                <input type="url" th:field="*{logoUrl}" th:placeholder="#{team.edit.form.logo.placeholder}" class="input input-bordered w-full" />
+            </div>
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">CATEGORIA</span>
-                    </label>
-                    <select th:field="*{category}" class="select select-bordered w-full">
-                        <option th:each="cat : ${T(br.com.fiap.ultimateteam.team.Category).values()}" th:value="${cat}" th:text="${cat}"></option>
-                    </select>
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.category}"></span>
+                </label>
+                <select th:field="*{category}" class="select select-bordered w-full">
+                    <option th:each="cat : ${T(br.com.fiap.ultimateteam.team.Category).values()}" th:value="${cat}" th:text="${cat}"></option>
+                </select>
+            </div>
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">DATA DE CRIAÇÃO</span>
-                    </label>
-                    <input type="date" name="creationDate" th:value="${#temporals.format(team.creationDate, 'yyyy-MM-dd')}" class="input input-bordered w-full" />
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.creation-date}"></span>
+                </label>
+                <input type="date" name="creationDate" th:value="${#temporals.format(team.creationDate, 'yyyy-MM-dd')}" class="input input-bordered w-full" />
+            </div>
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">COR PRIMÁRIA</span>
-                    </label>
-                    <input type="color" th:field="*{primaryColor}" class="input input-bordered w-full" />
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.primary-color}"></span>
+                </label>
+                <input type="color" th:field="*{primaryColor}" class="input input-bordered w-full" />
+            </div>
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-widert" style="color: oklch(0.3506 0.006 56.043);">COR SECUNDÁRIA</span>
-                    </label>
-                    <input type="color" th:field="*{secondaryColor}" class="input input-bordered w-full" />
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-widert" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.secondary-color}"></span>
+                </label>
+                <input type="color" th:field="*{secondaryColor}" class="input input-bordered w-full" />
+            </div>
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">DIA DO TREINO</span>
-                    </label>
-                    <select th:field="*{trainingDay}" class="select select-bordered w-full">
-                        <option th:each="day : ${T(br.com.fiap.ultimateteam.team.TrainingDay).values()}" th:value="${day}" th:text="${day}"></option>
-                    </select>
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-day}"></span>
+                </label>
+                <select th:field="*{trainingDay}" class="select select-bordered w-full">
+                    <option th:each="day : ${T(br.com.fiap.ultimateteam.team.TrainingDay).values()}" th:value="${day}" th:text="${day}"></option>
+                </select>
+            </div>
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">HORÁRIO DO TREINO</span>
-                    </label>
-                    <input type="text" th:field="*{trainingTime}" placeholder="Horário do treino" class="input input-bordered w-full" />
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-time}"></span>
+                </label>
+                <input type="text" th:field="*{trainingTime}" th:placeholder="#{team.edit.form.training-time.placeholder}" class="input input-bordered w-full" />
+            </div>
 
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);">LOCAL DO TREINO</span>
-                    </label>
-                    <input type="text" th:field="*{trainingLocation}" placeholder="Local do treino" class="input input-bordered w-full" />
-                </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-location}"></span>
+                </label>
+                <input type="text" th:field="*{trainingLocation}" th:placeholder="#{team.edit.form.training-location.placeholder}" class="input input-bordered w-full" />
+            </div>
 
-                <button type="submit" class="btn btn-outline btn-team-hover py-6 px-16 text-lg">SALVAR</button>
-            </form>
-        </div>
-    </main>
+            <button type="submit" class="btn btn-outline btn-primary py-6 px-16 text-lg" th:text="#{team.edit.form.save-button}"></button>
+        </form>
+    </div>
+</main>
 </body>
+</html>

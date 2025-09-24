@@ -3,12 +3,16 @@ package br.com.fiap.ultimateteam.player;
 import br.com.fiap.ultimateteam.team.Team;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "player")
 public class Player {
 
@@ -34,5 +38,5 @@ public class Player {
     private String nicknames;
 
     @ManyToMany(mappedBy = "players")
-    private Set<Team> teams;
+    private Set<Team> teams = new HashSet<>();
 }

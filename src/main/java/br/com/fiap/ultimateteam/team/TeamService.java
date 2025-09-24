@@ -1,7 +1,10 @@
 package br.com.fiap.ultimateteam.team;
 
+import br.com.fiap.ultimateteam.player.Player;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 

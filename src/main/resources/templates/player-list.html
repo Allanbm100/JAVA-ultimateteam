@@ -6,64 +6,52 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <meta charset="UTF-8">
 
-    <style th:if="${team?.primaryColor}">
-        .btn-team-hover {
-            color: [[${team.primaryColor}]];
-            border-color: [[${team.primaryColor}]];
-        }
-
-        .btn-team-hover:hover {
-            background-color: [[${team.primaryColor}]];
-            color: oklch(21% .006 56.043);
-            border-color: [[${team.primaryColor}]];
-        }
-    </style>
-
-    <title>Lista de Jogadores</title>
+    <title th:text="#{player.list.title}"></title>
 </head>
 
 <body>
-    <main class="grid min-h-screen place-items-center">
-        <div class="max-w-5xl mx-auto p-4">
+<div th:insert="~{_navbar :: navbar}"></div>
+<main class="min-h-screen flex justify-center pt-8">
+    <div class="max-w-5xl mx-auto p-4">
 
-            <h1 class="text-6xl font-bold mb-8 text-center">Jogadores</h1>
+        <h1 class="text-6xl font-bold mb-8 text-center" th:text="#{player.list.heading}"></h1>
 
-            <div class="flex justify-center mb-4">
-                <a th:href="@{/player/new}" class="btn btn-outline btn-team-hover py-4 px-8 text-md mb-6">Novo Jogador</a>
-            </div>
-
-            <div class="overflow-x-auto w-full">
-                <table class="table w-full">
-                    <thead>
-                    <tr>
-                        <th class="text-center text-sm font-extrabold tracking-wider border-r px-8" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);">NOME</th>
-                        <th class="text-center text-sm font-extrabold tracking-wider border-r px-8" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);">APELIDOS</th>
-                        <th class="text-center text-sm font-extrabold tracking-wider border-r px-4" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);">UNIFORME</th>
-                        <th class="text-center text-sm font-extrabold tracking-wider border-r px-8" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);">ATAQUE</th>
-                        <th class="text-center text-sm font-extrabold tracking-wider border-r px-8" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);">ZONA</th>
-                        <th class="text-center text-sm font-extrabold tracking-wider border-r px-6" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);">GÊNERO</th>
-                        <th class="text-center text-sm font-extrabold tracking-wider px-4" style="color: oklch(0.3506 0.006 56.043);">AÇÕES</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="player : ${players}">
-                        <td class="text-center border-r px-8" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.name}">Nome do Jogador</td>
-                        <td class="text-center border-r px-8" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${#strings.isEmpty(player.nicknames) ? '-' : player.nicknames}">Apelidos</td>
-                        <td class="text-center border-r px-4" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.uniformNumber}">Número do Uniforme</td>
-                        <td class="text-center border-r px-8" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.offensiveFunction}">Função no Ataque</td>
-                        <td class="text-center border-r px-8" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.zoneFunction}">Função na Defesa</td>
-                        <td class="text-center border-r px-6" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.gender}">Gênero</td>
-                        <td class="text-center px-4">
-                            <div class="flex gap-2 justify-center">
-                                <a th:href="@{/player/edit/{id}(id=${player.id})}" class="btn btn-sm btn-ghost">Editar</a>
-                                <a th:href="@{/player/delete/{id}(id=${player.id})}" class="btn btn-sm btn-ghost text-error" onclick="return confirm('Tem certeza que deseja apagar este jogador?')">Apagar</a>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="flex justify-center mb-4">
+            <a th:href="@{/player/new}" class="btn btn-outline btn-primary py-4 px-8 text-md mb-6" th:text="#{player.list.new-button}"></a>
         </div>
-    </main>
+
+        <div class="overflow-x-auto w-full">
+            <table class="table w-full">
+                <thead>
+                <tr>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.name}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.nicknames}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-4" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.uniform}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.offensive}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.zone}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-6" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.gender}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider px-4" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.actions}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="player : ${players}">
+                    <td class="text-center border-r px-8" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.name}"></td>
+                    <td class="text-center border-r px-8" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${#strings.isEmpty(player.nicknames) ? '-' : player.nicknames}"></td>
+                    <td class="text-center border-r px-4" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.uniformNumber}"></td>
+                    <td class="text-center border-r px-8" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.offensiveFunction}"></td>
+                    <td class="text-center border-r px-8" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.zoneFunction}"></td>
+                    <td class="text-center border-r px-6" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.gender}"></td>
+                    <td class="text-center px-4">
+                        <div class="flex gap-2 justify-center">
+                            <a th:href="@{/player/edit/{id}(id=${player.id})}" class="btn btn-sm btn-ghost" th:text="#{player.list.edit}"></a>
+                            <a th:href="@{/player/delete/{id}(id=${player.id})}" class="btn btn-sm btn-ghost text-error" th:text="#{player.list.delete}" th:onclick="|return confirm('#{player.list.delete.confirm}')|"></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 </body>
 </html>
