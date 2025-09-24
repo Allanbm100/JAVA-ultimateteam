@@ -14,79 +14,79 @@
 <main class="min-h-screen flex justify-center pt-8">
     <div th:if="${team}" class="max-w-md mx-auto p-4">
 
-        <h1 class="text-6xl font-bold mb-8 text-center" th:text="#{team.edit.form.heading}"></h1>
+        <h1 class="text-6xl font-bold mb-8 text-center uppercase" th:text="#{team.edit.form.heading}"></h1>
 
         <form th:action="@{/team/edit}" th:object="${team}" method="post" class="flex flex-col gap-4">
             <input type="hidden" th:field="*{id}" />
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.name}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.name}"></span>
                 </label>
-                <input type="text" th:field="*{name}" th:placeholder="#{team.edit.form.name.placeholder}" class="input input-bordered w-full" />
+                <input type="text" th:field="*{name}" th:placeholder="#{team.edit.form.name.placeholder}" class="input input-bordered w-full capitalize" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.logo}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.logo}"></span>
                 </label>
                 <input type="url" th:field="*{logoUrl}" th:placeholder="#{team.edit.form.logo.placeholder}" class="input input-bordered w-full" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.category}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.category}"></span>
                 </label>
                 <select th:field="*{category}" class="select select-bordered w-full">
-                    <option th:each="cat : ${T(br.com.fiap.ultimateteam.team.Category).values()}" th:value="${cat}" th:text="${cat}"></option>
+                    <option th:each="cat : ${T(br.com.fiap.ultimateteam.team.Category).values()}" th:value="${cat}" th:text="${cat}" class="uppercase"></option>
                 </select>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.creation-date}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.creation-date}"></span>
                 </label>
                 <input type="date" name="creationDate" th:value="${#temporals.format(team.creationDate, 'yyyy-MM-dd')}" class="input input-bordered w-full" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.primary-color}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.primary-color}"></span>
                 </label>
                 <input type="color" th:field="*{primaryColor}" class="input input-bordered w-full" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-widert" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.secondary-color}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.secondary-color}"></span>
                 </label>
                 <input type="color" th:field="*{secondaryColor}" class="input input-bordered w-full" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-day}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-day}"></span>
                 </label>
                 <select th:field="*{trainingDay}" class="select select-bordered w-full">
-                    <option th:each="day : ${T(br.com.fiap.ultimateteam.team.TrainingDay).values()}" th:value="${day}" th:text="${day}"></option>
+                    <option th:each="day : ${T(br.com.fiap.ultimateteam.team.TrainingDay).values()}" th:value="${day}" th:text="${day}" class="capitalize"></option>
                 </select>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-time}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-time}"></span>
                 </label>
                 <input type="text" th:field="*{trainingTime}" th:placeholder="#{team.edit.form.training-time.placeholder}" class="input input-bordered w-full" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-location}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.training-location}"></span>
                 </label>
-                <input type="text" th:field="*{trainingLocation}" th:placeholder="#{team.edit.form.training-location.placeholder}" class="input input-bordered w-full" />
+                <input type="text" th:field="*{trainingLocation}" th:placeholder="#{team.edit.form.training-location.placeholder}" class="input input-bordered w-full capitalize" />
             </div>
 
-            <button type="submit" class="btn btn-outline btn-primary py-6 px-16 text-lg" th:text="#{team.edit.form.save-button}"></button>
+            <button type="submit" class="btn btn-outline btn-primary py-6 px-16 text-lg uppercase" th:text="#{team.edit.form.save-button}"></button>
         </form>
     </div>
 </main>

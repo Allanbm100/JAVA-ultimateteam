@@ -20,37 +20,37 @@
             </div>
         </div>
 
-        <h1 th:text="${team.name}" class="text-6xl font-bold mb-8"></h1>
+        <h1 th:text="${team.name}" class="text-6xl font-bold mb-8 uppercase"></h1>
 
         <div class="flex justify-center gap-10 mb-8">
             <div>
-                <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.category}"></h3>
-                <p th:text="${team.category}" class="text-md font-extrabold tracking-widest"></p>
+                <h3 class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.category}"></h3>
+                <p th:text="${team.category}" class="text-md font-extrabold tracking-widest uppercase"></p>
             </div>
             <div>
-                <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.creation}"></h3>
+                <h3 class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.creation}"></h3>
                 <p th:text="${#temporals.format(team.creationDate, 'dd/MM/yyyy')}" class="text-md font-extrabold tracking-widest"></p>
             </div>
         </div>
 
         <div class="relative w-full border rounded-lg px-6 pb-5 mb-4" style="border-color: oklch(0.3506 0.006 56.043);">
-            <h2 class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[oklch(21%_.006_56.043)] px-4 text-xl font-bold" th:text="#{team.profile.trainings}"></h2>
+            <h2 class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[oklch(21%_.006_56.043)] px-4 text-xl font-bold uppercase" th:text="#{team.profile.trainings}"></h2>
             <div class="flex flex-col sm:flex-row justify-center gap-6 mt-6">
                 <div>
-                    <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.day}"></h3>
-                    <p th:text="${team.trainingDay}" class="text-md font-extrabold tracking-widest"></p>
+                    <h3 class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.day}"></h3>
+                    <p th:text="${team.trainingDay}" class="text-md font-extrabold tracking-widest capitalize"></p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.time}"> </h3>
+                    <h3 class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.time}"> </h3>
                     <p th:text="${team.trainingTime}" class="text-md font-extrabold tracking-widest"></p>
                 </div>
                 <div>
-                    <h3 class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.location}"></h3>
-                    <p th:text="${#strings.capitalize(team.trainingLocation.toLowerCase())}" class="text-md font-extrabold tracking-widest"></p>
+                    <h3 class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.profile.location}"></h3>
+                    <p th:text="${#strings.capitalize(team.trainingLocation.toLowerCase())}" class="text-md font-extrabold tracking-widest capitalize"></p>
                 </div>
             </div>
         </div>
-        <a th:href="@{'/team/edit/' + ${team.id}}" class="btn btn-outline btn-primary py-6 px-16 text-lg" th:text="#{team.profile.edit-button}"></a>
+        <a th:href="@{'/team/edit/' + ${team.id}}" class="btn btn-outline btn-primary py-6 px-16 text-lg uppercase" th:text="#{team.profile.edit-button}"></a>
     </div>
 </main>
 </body>

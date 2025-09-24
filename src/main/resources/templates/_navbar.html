@@ -1,4 +1,5 @@
-<div th:fragment="navbar" class="navbar shadow-sm py-3" style="background-color: oklch(18% 0.006 56.043);">
+<div th:fragment="navbar" class="navbar shadow-sm py-3" style="background-color: oklch(18% 0.006 56.043);"
+     xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="navbar-start">
 
         <div class="dropdown">
@@ -8,12 +9,12 @@
                 </svg>
             </div>
             <ul
-                    tabindex="0"
-                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                tabindex="0"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
             </ul>
         </div>
 
-        <a class="btn btn-ghost text-xl text-white ml-4" th:href="@{/}" th:text="${team?.name} ? ${team.name} : 'Ultimate Team'">Ultimate Team</a>
+        <a class="btn btn-ghost text-xl text-white ml-4 capitalize" th:href="@{/}" th:text="${team?.name} ? ${team.name} : 'Ultimate Team'"></a>
     </div>
 
     <div class="navbar-center hidden lg:flex p-4">
@@ -29,7 +30,7 @@
 
                 <a th:href="@{/player}"
                    class="btn btn-ghost rounded-none rounded-r-lg text-sm h-full border-l-0
-                          hover:bg-white hover:text-black hover:border-white"
+                          hover:bg-white hover:text-black hover:border-white capitalize"
                    style="border: 1px solid rgba(255, 255, 255, 0.6);" th:text="#{navbar.players}"></a>
             </div>
 
@@ -45,14 +46,14 @@
 
                 <a th:href="@{/training}"
                    class="btn btn-ghost rounded-none rounded-r-lg text-sm h-full border-l-0
-                          hover:bg-white hover:text-black hover:border-white"
+                          hover:bg-white hover:text-black hover:border-white capitalize"
                    style="border: 1px solid rgba(255, 255, 255, 0.6);" th:text="#{navbar.trainings}"></a>
             </div>
 
             <div class="flex items-stretch z-10" style="height: 2.5rem;">
                 <a th:href="@{/attendance/grid}"
                    class="btn btn-ghost text-sm h-full rounded-lg
-                          hover:bg-white hover:text-black hover:border-white"
+                          hover:bg-white hover:text-black hover:border-white capitalize"
                    style="border: 1px solid rgba(255, 255, 255, 0.6);" th:text="#{navbar.attendance}"></a>
             </div>
         </div>
@@ -66,12 +67,12 @@
                     <line x1="2" y1="12" x2="22" y2="12"></line>
                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                 </svg>
-                <span class="hidden sm:inline-block">Idioma</span>
+                <span th:text="#{navbar.language}" class="hidden sm:inline-block capitalize"></span>
             </div>
             <ul tabindex="0" class="menu dropdown-content rounded-box z-[1] mt-3 w-32 p-2 shadow flex flex-col items-center" style="background-color: oklch(18% 0.006 56.043);">
-                <li class="flex justify-center"><a href="?lang=pt_BR" class="text-sm">Português</a></li>
-                <li class="flex justify-center"><a href="?lang=en_US" class="text-sm">English</a></li>
-                <li class="flex justify-center"><a href="?lang=es" class="text-sm">Español</a></li>
+                <li class="flex justify-center"><a th:text="#{navbar.language.portuguese}" href="?lang=pt_BR" class="text-sm capitalize"></a></li>
+                <li class="flex justify-center"><a th:text="#{navbar.language.english}" href="?lang=en_US" class="text-sm capitalize"></a></li>
+                <li class="flex justify-center"><a th:text="#{navbar.language.spanish}" href="?lang=es" class="text-sm capitalize"></a></li>
             </ul>
         </div>
         <div class="dropdown dropdown-end mr-8">
@@ -92,7 +93,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span th:text="#{navbar.dropdown.profile}"></span>
+                        <span th:text="#{navbar.dropdown.profile}" class="text-sm capitalize"></span>
                     </a>
                 </li>
                 <li>
@@ -100,7 +101,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
-                        <span th:text="#{navbar.dropdown.logout}"></span>
+                        <span th:text="#{navbar.dropdown.logout}" class="text-sm capitalize"></span>
                     </a>
                 </li>
             </ul>

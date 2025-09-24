@@ -13,7 +13,7 @@
 <main class="min-h-screen flex justify-center pt-8">
     <div class="max-w-md mx-auto p-4">
 
-        <h1 class="text-6xl font-bold mb-8 text-center" th:text="#{player.form.new.title}"></h1>
+        <h1 class="text-6xl font-bold mb-8 text-center uppercase" th:text="#{player.form.new.title}"></h1>
 
         <div th:if="${errorMessage}" class="alert alert-error mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -23,29 +23,24 @@
         <form th:action="@{/player/save}" th:object="${playerRequestDTO}" method="post" class="flex flex-col gap-4">
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.team}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.team}"></span>
                 </label>
                 <select th:field="*{teamId}" class="select select-bordered w-full"
                         th:errorclass="select-error">
-                    <option value="" th:text="#{player.form.team.placeholder}"></option>
-                    <option th:each="team : ${allTeams}"
-                            th:value="${team.id}"
-                            th:text="${team.name}">
-                        Nome do Time
-                    </option>
+                    <option value="" th:text="#{player.form.team.placeholder}" class="capitalize"></option>
+                    <option th:each="team : ${allTeams}" th:value="${team.id}" th:text="${team.name}" class="capitalize"></option>
                 </select>
                 <label class="label" th:if="${#fields.hasErrors('teamId')}">
                     <span class="label-text-alt text-error" th:errors="*{teamId}" th:text="#{player.form.validation.error}"></span>
                 </label>
             </div>
 
-
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.name}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.name}"></span>
                 </label>
                 <input type="text" th:field="*{name}" th:placeholder="#{player.form.name.placeholder}"
-                       class="input input-bordered w-full" th:errorclass="input-error" />
+                       class="input input-bordered w-full capitalize" th:errorclass="input-error" />
                 <label class="label" th:if="${#fields.hasErrors('name')}">
                     <span class="label-text-alt text-error" th:errors="*{name}" th:text="#{player.form.validation.error}"></span>
                 </label>
@@ -53,17 +48,17 @@
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.nicknames}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.nicknames}"></span>
                 </label>
-                <input type="text" th:field="*{nicknames}" th:placeholder="#{player.form.nicknames.placeholder}" class="input input-bordered w-full" />
+                <input type="text" th:field="*{nicknames}" th:placeholder="#{player.form.nicknames.placeholder}" class="input input-bordered w-full capitalize" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.uniform-number}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.uniform-number}"></span>
                 </label>
                 <input type="number" th:field="*{uniformNumber}" th:placeholder="#{player.form.uniform-number.placeholder}"
-                       class="input input-bordered w-full" th:errorclass="input-error" />
+                       class="input input-bordered w-full capitalize" th:errorclass="input-error" />
                 <label class="label" th:if="${#fields.hasErrors('uniformNumber')}">
                     <span class="label-text-alt text-error" th:errors="*{uniformNumber}" th:text="#{player.form.validation.error}"></span>
                 </label>
@@ -71,7 +66,7 @@
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.birth-date}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.birth-date}"></span>
                 </label>
                 <input type="date" th:field="*{birthDate}" class="input input-bordered w-full" th:errorclass="input-error" />
                 <label class="label" th:if="${#fields.hasErrors('birthDate')}">
@@ -81,31 +76,31 @@
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.offensive-function}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.offensive-function}"></span>
                 </label>
                 <select th:field="*{offensiveFunction}" class="select select-bordered w-full">
-                    <option th:each="func : ${T(br.com.fiap.ultimateteam.player.OffensiveFunction).values()}" th:value="${func}" th:text="${func}"></option>
+                    <option th:each="func : ${T(br.com.fiap.ultimateteam.player.OffensiveFunction).values()}" th:value="${func}" th:text="${func}" class="capitalize"></option>
                 </select>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.zone-function}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.zone-function}"></span>
                 </label>
                 <select th:field="*{zoneFunction}" class="select select-bordered w-full">
-                    <option th:each="func : ${T(br.com.fiap.ultimateteam.player.ZoneFunction).values()}" th:value="${func}" th:text="${func}"></option>
+                    <option th:each="func : ${T(br.com.fiap.ultimateteam.player.ZoneFunction).values()}" th:value="${func}" th:text="${func}" class="capitalize"></option>
                 </select>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.gender}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.form.label.gender}"></span>
                 </label>
                 <select th:field="*{gender}" class="select select-bordered w-full">
-                    <option th:each="g : ${T(br.com.fiap.ultimateteam.player.Gender).values()}" th:value="${g}" th:text="${g}"></option>
+                    <option th:each="g : ${T(br.com.fiap.ultimateteam.player.Gender).values()}" th:value="${g}" th:text="${g}" class="capitalize"></option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-outline btn-primary mt-6" th:text="#{player.form.save-button}"></button>
+            <button type="submit" class="btn btn-outline btn-primary mt-6 uppercase" th:text="#{player.form.save-button}"></button>
         </form>
     </div>
 </main>

@@ -13,46 +13,46 @@
 <main class="min-h-screen flex justify-center pt-8">
     <div class="max-w-md mx-auto p-4">
 
-        <h1 class="text-6xl font-bold mb-8 text-center" th:text="${training?.id} ? #{training.form.edit.title} : #{training.form.new.title}"></h1>
+        <h1 class="text-6xl font-bold mb-8 text-center uppercase" th:text="${training?.id} ? #{training.form.edit.title} : #{training.form.new.title}"></h1>
 
         <form th:action="@{/training/save}" th:object="${training}" method="post" class="flex flex-col gap-4">
             <input type="hidden" th:field="*{id}" />
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.date}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.date}"></span>
                 </label>
                 <input type="date" name="date" th:value="${#temporals.format(training.date, 'yyyy-MM-dd')}" class="input input-bordered w-full" required />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.start-time}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.start-time}"></span>
                 </label>
                 <input type="time" name="startTime" th:value="${#temporals.format(training.startTime, 'HH:mm')}" class="input input-bordered w-full" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.duration}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.duration}"></span>
                 </label>
-                <input type="number" th:field="*{durationMinutes}" th:placeholder="#{training.form.duration.placeholder}" class="input input-bordered w-full" min="10" />
+                <input type="number" th:field="*{durationMinutes}" th:placeholder="#{training.form.duration.placeholder}" class="input input-bordered w-full capitalize" min="10" />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.location}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.location}"></span>
                 </label>
-                <input type="text" th:field="*{location}" th:placeholder="#{training.form.location.placeholder}" class="input input-bordered w-full" required />
+                <input type="text" th:field="*{location}" th:placeholder="#{training.form.location.placeholder}" class="input input-bordered w-full capitalize" required />
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.description}"></span>
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.description}"></span>
                 </label>
-                <textarea th:field="*{description}" th:placeholder="#{training.form.description.placeholder}" class="textarea textarea-bordered w-full"></textarea>
+                <textarea th:field="*{description}" th:placeholder="#{training.form.description.placeholder}" class="textarea textarea-bordered w-full capitalize"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-outline btn-primary mt-6" th:text="#{training.form.save-button}"></button>
+            <button type="submit" class="btn btn-outline btn-primary mt-6 uppercase" th:text="#{training.form.save-button}"></button>
         </form>
     </div>
 </main>
