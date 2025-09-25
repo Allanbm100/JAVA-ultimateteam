@@ -40,8 +40,13 @@
                     <td class="text-center border-r px-10" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${training.durationMinutes}"></td>
                     <td class="text-center px-4">
                         <div class="flex gap-2 justify-center">
-                            <a th:href="@{/training/edit/{id}(id=${training.id})}" class="btn btn-sm btn-ghost uppercase" th:text="#{training.list.edit}"></a>
-                            <a th:href="@{/training/delete/{id}(id=${training.id})}" class="btn btn-sm btn-ghost text-error uppercase" th:text="#{training.list.delete}" th:onclick="|return confirm('#{training.list.delete.confirm}')|"></a>
+                            <a th:href="@{/training/{id}(id=${training.id})}" class="btn btn-sm btn-ghost uppercase" th:text="#{training.list.edit}"></a>                            <form th:action="@{'/training/' + ${training.id}}" method="post">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type="submit" class="btn btn-sm btn-ghost text-error uppercase"
+                                        th:text="#{training.list.delete}"
+                                        th:onclick="|return confirm('#{training.list.delete.confirm}')|">
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>

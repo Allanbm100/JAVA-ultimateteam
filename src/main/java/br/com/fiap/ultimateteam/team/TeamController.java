@@ -21,8 +21,8 @@ public class TeamController {
         return "team-profile";
     }
 
-    @GetMapping("/edit/{id}")
-    public String teamEditPost(@PathVariable Long id, Model model) {
+    @GetMapping("/{id}")
+    public String teamEditForm(@PathVariable Long id, Model model) {
         var teamOptional = teamService.findTeamById(id);
 
         if (teamOptional.isPresent()) {
@@ -33,8 +33,9 @@ public class TeamController {
         }
     }
 
-    @PostMapping("/edit")
-    public String teamEditSave(@ModelAttribute Team team) {
+    @PutMapping("/{id}")
+    public String teamEditSave(@PathVariable Long id, @ModelAttribute Team team) {
+        team.setId(id);
         teamService.saveTeam(team);
         return "redirect:/team/profile";
     }

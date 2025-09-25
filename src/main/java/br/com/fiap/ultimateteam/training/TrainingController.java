@@ -14,6 +14,10 @@ public class TrainingController {
     private final TrainingService trainingService;
     private final TeamService teamService;
 
+    private void addTeamToModel(Model model) {
+        teamService.findTeamById(1L).ifPresent(t -> model.addAttribute("team", t));
+    }
+
     @GetMapping
     public String listTrainings(Model model) {
         var teamOptional = teamService.findTeamById(1L);
@@ -27,26 +31,41 @@ public class TrainingController {
         return "redirect:/team/profile";
     }
 
-    @GetMapping({"/new", "/edit/{id}"})
-    public String showForm(@PathVariable(required = false) Long id, Model model) {
-        Training training = id == null ? new Training() :
-                trainingService.findTrainingById(id).orElse(new Training());
-
-        model.addAttribute("training", training);
-        teamService.findTeamById(1L).ifPresent(t -> model.addAttribute("team", t));
-
-        return "training-form";
+    @GetMapping("/new")
+    public String newTrainingForm(Model model) {
+        model.addAttribute("training", new Training());
+        addTeamToModel(model);
+        return "training-new"; // Nova View
     }
 
     @PostMapping("/save")
     public String saveTraining(@ModelAttribute Training training) {
+        teamService.findTeamById(1L).ifPresent(training::setTeam);
+        trainingService.saveTraining(training);
+        return "redirect:/training";
+    }
+
+    @GetMapping("/{id}")
+    public String editTrainingForm(@PathVariable Long id, Model model) {
+        Training training = trainingService.findTrainingById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Treino não encontrado com ID: " + id));
+
+        model.addAttribute("training", training);
+        addTeamToModel(model);
+
+        return "training-edit";
+    }
+
+    @PutMapping("/{id}")
+    public String updateTraining(@PathVariable Long id, @ModelAttribute Training training) {
+        training.setId(id);
         teamService.findTeamById(1L).ifPresent(training::setTeam);
 
         trainingService.saveTraining(training);
         return "redirect:/training";
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteTraining(@PathVariable Long id) {
         trainingService.deleteById(id);
         return "redirect:/training";

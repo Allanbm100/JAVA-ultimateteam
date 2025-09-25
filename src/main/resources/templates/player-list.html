@@ -24,27 +24,56 @@
             <table class="table w-full">
                 <thead>
                 <tr>
-                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8 uppercase" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.name}"></th>
-                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8 uppercase" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.nicknames}"></th>
-                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-4 uppercase" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.uniform}"></th>
-                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8 uppercase" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.offensive}"></th>
-                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8 uppercase" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.zone}"></th>
-                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-6 uppercase" style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.gender}"></th>
-                    <th class="text-center text-sm font-extrabold tracking-wider px-4 uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{player.list.column.actions}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8 uppercase"
+                        style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);"
+                        th:text="#{player.list.column.name}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8 uppercase"
+                        style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);"
+                        th:text="#{player.list.column.nicknames}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-4 uppercase"
+                        style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);"
+                        th:text="#{player.list.column.uniform}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8 uppercase"
+                        style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);"
+                        th:text="#{player.list.column.offensive}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-8 uppercase"
+                        style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);"
+                        th:text="#{player.list.column.zone}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider border-r px-6 uppercase"
+                        style="color: oklch(0.3506 0.006 56.043); border-color: oklch(0.3506 0.006 56.043);"
+                        th:text="#{player.list.column.gender}"></th>
+                    <th class="text-center text-sm font-extrabold tracking-wider px-4 uppercase"
+                        style="color: oklch(0.3506 0.006 56.043);"
+                        th:text="#{player.list.column.actions}"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="player : ${players}">
-                    <td class="text-center border-r px-8 capitalize" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.name}"></td>
-                    <td class="text-center border-r px-8 capitalize" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${#strings.isEmpty(player.nicknames) ? '-' : player.nicknames}"></td>
-                    <td class="text-center border-r px-4 capitalize" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.uniformNumber}"></td>
-                    <td class="text-center border-r px-8 capitalize" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.offensiveFunction}"></td>
-                    <td class="text-center border-r px-8 capitalize" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.zoneFunction}"></td>
-                    <td class="text-center border-r px-6 capitalize" th:style="'border-color: oklch(0.3506 0.006 56.043);'" th:text="${player.gender}"></td>
+                    <td class="text-center border-r px-8 capitalize"
+                        th:style="'border-color: oklch(0.3506 0.006 56.043);'"
+                        th:text="${player.name}"></td>
+                    <td class="text-center border-r px-8 capitalize"
+                        th:style="'border-color: oklch(0.3506 0.006 56.043);'"
+                        th:text="${#strings.isEmpty(player.nicknames) ? '-' : player.nicknames}"></td>
+                    <td class="text-center border-r px-4 capitalize"
+                        th:style="'border-color: oklch(0.3506 0.006 56.043);'"
+                        th:text="${player.uniformNumber}"></td>
+                    <td class="text-center border-r px-8 capitalize"
+                        th:style="'border-color: oklch(0.3506 0.006 56.043);'"
+                        th:text="${player.offensiveFunction}"></td>
+                    <td class="text-center border-r px-8 capitalize"
+                        th:style="'border-color: oklch(0.3506 0.006 56.043);'"
+                        th:text="${player.zoneFunction}"></td>
+                    <td class="text-center border-r px-6 capitalize"
+                        th:style="'border-color: oklch(0.3506 0.006 56.043);'"
+                        th:text="${player.gender}"></td>
                     <td class="text-center px-4">
                         <div class="flex gap-2 justify-center">
                             <a th:href="@{/player/edit/{id}(id=${player.id})}" class="btn btn-sm btn-ghost uppercase" th:text="#{player.list.edit}"></a>
-                            <a th:href="@{/player/delete/{id}(id=${player.id})}" class="btn btn-sm btn-ghost text-error uppercase" th:text="#{player.list.delete}" th:onclick="|return confirm('#{player.list.delete.confirm}')|"></a>
+                            <form th:action="@{'/player/' + ${player.id}}" method="post">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type="submit" class="btn btn-error btn-sm">Deletar</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

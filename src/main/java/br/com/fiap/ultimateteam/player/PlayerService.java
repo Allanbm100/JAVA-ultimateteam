@@ -31,8 +31,21 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
+    @Transactional
     public void deleteById(Long id) {
-        playerRepository.deleteById(id);
+
+        Player player = playerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Jogador não encontrado com ID: " + id));
+
+        for (Team team : player.getTeams()) {
+            team.getPlayers().remove(player);
+            teamService.saveTeam(team);
+        }
+
+        player.getTeams().clear();
+        playerRepository.save(player);
+
+        playerRepository.delete(player);
     }
 
     @Transactional
@@ -62,4 +75,33 @@ public class PlayerService {
 
         return savedPlayer;
     }
+
+    @Transactional
+    public Player updatePlayerFromDTO(PlayerRequestDTO dto) {
+
+        Player existing = playerRepository.findById(dto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Jogador não encontrado com ID: " + dto.getId()));
+
+        Team team = teamService.findTeamById(dto.getTeamId())
+                .orElseThrow(() -> new IllegalArgumentException("Time não encontrado com ID: " + dto.getTeamId()));
+
+        existing.setName(dto.getName());
+        existing.setUniformNumber(dto.getUniformNumber());
+        existing.setBirthDate(dto.getBirthDate());
+        existing.setOffensiveFunction(dto.getOffensiveFunction());
+        existing.setZoneFunction(dto.getZoneFunction());
+        existing.setGender(dto.getGender());
+        existing.setNicknames(dto.getNicknames());
+
+        existing.getTeams().clear();
+        existing.getTeams().add(team);
+
+        Player savedPlayer = playerRepository.save(existing);
+
+        team.getPlayers().add(savedPlayer);
+        teamService.saveTeam(team);
+
+        return savedPlayer;
+    }
+
 }

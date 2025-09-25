@@ -1,27 +1,45 @@
 package br.com.fiap.ultimateteam.player;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import br.com.fiap.ultimateteam.team.Team;
+import br.com.fiap.ultimateteam.player.Player;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 public class PlayerRequestDTO {
-    @NotBlank(message = "O nome é obrigatório.")
-    private String name;
 
-    @NotNull(message = "O número da camisa é obrigatório.")
+    private Long id;
+    private String name;
+    private String nicknames;
     private Integer uniformNumber;
 
-    @NotNull(message = "A data de nascimento é obrigatória.")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
-
-    @NotNull(message = "A seleção do time é obrigatória.")
-    private Long teamId;
-
     private OffensiveFunction offensiveFunction;
     private ZoneFunction zoneFunction;
     private Gender gender;
-    private String nicknames;
+    private Long teamId;
+
+    public static PlayerRequestDTO fromEntity(Player player) {
+        PlayerRequestDTO dto = new PlayerRequestDTO();
+        dto.setId(player.getId());
+        dto.setName(player.getName());
+        dto.setNicknames(player.getNicknames());
+        dto.setUniformNumber(player.getUniformNumber());
+        dto.setBirthDate(player.getBirthDate());
+        dto.setOffensiveFunction(player.getOffensiveFunction());
+        dto.setZoneFunction(player.getZoneFunction());
+        dto.setGender(player.getGender());
+
+        if (!player.getTeams().isEmpty()) {
+            Team team = player.getTeams().iterator().next();
+            dto.setTeamId(team.getId());
+        }
+
+        return dto;
+    }
 }

@@ -16,7 +16,10 @@
 
         <h1 class="text-6xl font-bold mb-8 text-center uppercase" th:text="#{team.edit.form.heading}"></h1>
 
-        <form th:action="@{/team/edit}" th:object="${team}" method="post" class="flex flex-col gap-4">
+        <form th:action="@{'/team/' + ${team.id}}" th:object="${team}" method="post" class="flex flex-col gap-4">
+
+            <input type="hidden" name="_method" value="put"/>
+
             <input type="hidden" th:field="*{id}" />
 
             <div class="form-control w-full">
