@@ -22,35 +22,44 @@
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.date}"></span>
                 </label>
-                <input type="date" th:field="*{date}" class="input input-bordered w-full" required />
+                <input type="date" th:field="*{date}"
+                       class="input input-bordered w-full"
+                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('date')}">
+                <span class="label-text-alt text-error" th:errors="*{date}" th:text="#{player.form.validation.error}"></span>
+            </label>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.start-time}"></span>
                 </label>
-                <input type="time" th:field="*{startTime}" class="input input-bordered w-full" />
+                <input type="time" th:field="*{startTime}"
+                       class="input input-bordered w-full"
+                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('startTime')}">
+                <span class="label-text-alt text-error" th:errors="*{startTime}" th:text="#{player.form.validation.error}"></span>
+            </label>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.duration}"></span>
                 </label>
-                <input type="number" th:field="*{durationMinutes}" th:placeholder="#{training.form.duration.placeholder}" class="input input-bordered w-full capitalize" min="10" />
+                <input type="number" th:field="*{durationMinutes}" th:placeholder="#{training.form.duration.placeholder}"
+                       class="input input-bordered w-full capitalize" min="10"
+                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('durationMinutes')}">
+                <span class="label-text-alt text-error" th:errors="*{durationMinutes}" th:text="#{player.form.validation.error}"></span>
+            </label>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.location}"></span>
                 </label>
-                <input type="text" th:field="*{location}" th:placeholder="#{training.form.location.placeholder}" class="input input-bordered w-full capitalize" required />
-            </div>
-
-            <div class="form-control w-full">
-                <label class="label">
-                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.description}"></span>
-                </label>
-                <textarea th:field="*{description}" th:placeholder="#{training.form.description.placeholder}" class="textarea textarea-bordered w-full capitalize"></textarea>
+                <input type="text" th:field="*{location}" th:placeholder="#{training.form.location.placeholder}"
+                       class="input input-bordered w-full capitalize"
+                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('location')}">
+                <span class="label-text-alt text-error" th:errors="*{location}" th:text="#{player.form.validation.error}"></span>
+            </label>
             </div>
 
             <button type="submit" class="btn btn-outline btn-primary mt-6 uppercase btn-block" th:text="#{training.form.save-button}"></button>

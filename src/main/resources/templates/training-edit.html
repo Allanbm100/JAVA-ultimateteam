@@ -23,7 +23,7 @@
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.date}"></span>
                 </label>
-                <input type="date" th:field="*{date}" class="input input-bordered w-full" required />
+                <input type="date" th:field="*{date}" class="input input-bordered w-full" />
             </div>
 
             <div class="form-control w-full">
@@ -44,7 +44,7 @@
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.location}"></span>
                 </label>
-                <input type="text" th:field="*{location}" th:placeholder="#{training.form.location.placeholder}" class="input input-bordered w-full capitalize" required />
+                <input type="text" th:field="*{location}" th:placeholder="#{training.form.location.placeholder}" class="input input-bordered w-full capitalize" />
             </div>
 
             <div class="form-control w-full">

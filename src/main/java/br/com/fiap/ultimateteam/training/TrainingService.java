@@ -20,7 +20,7 @@ public class TrainingService {
 
 
     public List<Training> findTrainingsByTeam(Team team) {
-        return this.findAll();
+        return trainingRepository.findByTeam(team);
     }
 
     public Optional<Training> findTrainingById(Long id) {

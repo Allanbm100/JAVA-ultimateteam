@@ -26,30 +26,47 @@
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.name}"></span>
                 </label>
-                <input type="text" th:field="*{name}" th:placeholder="#{team.edit.form.name.placeholder}" class="input input-bordered w-full capitalize" />
+                <input type="text" th:field="*{name}" th:placeholder="#{team.edit.form.name.placeholder}"
+                       class="input input-bordered w-full capitalize"
+                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('name')}">
+                <span class="label-text-alt text-error" th:errors="*{name}" th:text="#{player.form.validation.error}"></span>
+            </label>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.logo}"></span>
                 </label>
-                <input type="url" th:field="*{logoUrl}" th:placeholder="#{team.edit.form.logo.placeholder}" class="input input-bordered w-full" />
+                <input type="url" th:field="*{logoUrl}" th:placeholder="#{team.edit.form.logo.placeholder}"
+                       class="input input-bordered w-full"
+                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('logoUrl')}">
+                <span class="label-text-alt text-error" th:errors="*{logoUrl}" th:text="#{player.form.validation.error}"></span>
+            </label>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.category}"></span>
                 </label>
-                <select th:field="*{category}" class="select select-bordered w-full">
-                    <option th:each="cat : ${T(br.com.fiap.ultimateteam.team.Category).values()}" th:value="${cat}" th:text="${cat}" class="uppercase"></option>
+                <select th:field="*{category}" class="select select-bordered w-full" th:errorclass="select-error"> <option th:each="cat : ${T(br.com.fiap.ultimateteam.team.Category).values()}" th:value="${cat}" th:text="${cat}" class="uppercase"></option>
                 </select>
+
+                <label class="label" th:if="${#fields.hasErrors('category')}">
+                    <span class="label-text-alt text-error" th:errors="*{category}" th:text="#{player.form.validation.error}"></span>
+                </label>
             </div>
 
             <div class="form-control w-full">
                 <label class="label">
                     <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{team.edit.form.label.creation-date}"></span>
                 </label>
-                <input type="date" name="creationDate" th:value="${#temporals.format(team.creationDate, 'yyyy-MM-dd')}" class="input input-bordered w-full" />
+                <input type="date" th:field="*{creationDate}"
+                       class="input input-bordered w-full"
+                       th:errorclass="input-error" />
+
+                <label class="label" th:if="${#fields.hasErrors('creationDate')}">
+                    <span class="label-text-alt text-error" th:errors="*{creationDate}" th:text="#{player.form.validation.error}"></span>
+                </label>
             </div>
 
             <div class="form-control w-full">

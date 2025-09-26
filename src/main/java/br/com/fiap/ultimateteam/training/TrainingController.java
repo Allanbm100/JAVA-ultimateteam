@@ -1,9 +1,11 @@
 package br.com.fiap.ultimateteam.training;
 
 import br.com.fiap.ultimateteam.team.TeamService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -39,7 +41,13 @@ public class TrainingController {
     }
 
     @PostMapping("/save")
-    public String saveTraining(@ModelAttribute Training training) {
+    public String saveTraining(@ModelAttribute @Valid Training training, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            addTeamToModel(model);
+            return "training-new";
+        }
+
         teamService.findTeamById(1L).ifPresent(training::setTeam);
         trainingService.saveTraining(training);
         return "redirect:/training";
@@ -57,7 +65,13 @@ public class TrainingController {
     }
 
     @PutMapping("/{id}")
-    public String updateTraining(@PathVariable Long id, @ModelAttribute Training training) {
+    public String updateTraining(@PathVariable Long id, @ModelAttribute @Valid Training training, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            addTeamToModel(model);
+            return "training-edit";
+        }
+
         training.setId(id);
         teamService.findTeamById(1L).ifPresent(training::setTeam);
 

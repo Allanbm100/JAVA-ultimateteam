@@ -71,7 +71,6 @@ public class PlayerService {
         Player savedPlayer = playerRepository.save(newPlayer);
 
         team.getPlayers().add(savedPlayer);
-        teamService.saveTeam(team);
 
         return savedPlayer;
     }
@@ -99,7 +98,6 @@ public class PlayerService {
         Player savedPlayer = playerRepository.save(existing);
 
         team.getPlayers().add(savedPlayer);
-        teamService.saveTeam(team);
 
         return savedPlayer;
     }

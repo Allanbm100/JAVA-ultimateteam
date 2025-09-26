@@ -2,7 +2,10 @@ package br.com.fiap.ultimateteam.training;
 
 import br.com.fiap.ultimateteam.team.Team;
 import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,12 +24,18 @@ public class Training {
     private Long id;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull(message = "{training.date.notnull}")
+    @FutureOrPresent(message = "{training.date.futureOrPresent}")
     private LocalDate date;
 
+    @NotNull(message = "{training.startTime.notnull}")
     private LocalTime startTime;
 
+    @NotNull(message = "{training.duration.notnull}")
+    @Min(value = 10, message = "{training.duration.min}")
     private Integer durationMinutes;
 
+    @NotBlank(message = "{training.location.notblank}")
     private String location;
 
     @Column(columnDefinition = "TEXT")
@@ -34,5 +43,6 @@ public class Training {
 
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
+    @NotNull
     private Team team;
 }

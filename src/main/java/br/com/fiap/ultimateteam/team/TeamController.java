@@ -1,8 +1,10 @@
 package br.com.fiap.ultimateteam.team;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -34,7 +36,12 @@ public class TeamController {
     }
 
     @PutMapping("/{id}")
-    public String teamEditSave(@PathVariable Long id, @ModelAttribute Team team) {
+    public String teamEditSave(@PathVariable Long id, @ModelAttribute @Valid Team team, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            return "team-edit";
+        }
+
         team.setId(id);
         teamService.saveTeam(team);
         return "redirect:/team/profile";
