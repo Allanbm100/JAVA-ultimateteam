@@ -78,7 +78,7 @@ public class TeamController {
     @PutMapping("/team/{id}")
     public String teamEditSave(
             @PathVariable Long id,
-            @ModelAttribute("formTeam") @Valid Team teamFromForm, // Renomeado para evitar conflito
+            @ModelAttribute("formTeam") @Valid Team teamFromForm,
             BindingResult result,
             Model model,
             RedirectAttributes redirectAttributes,
@@ -86,7 +86,7 @@ public class TeamController {
 
         if (result.hasErrors()) {
             teamFromForm.setId(id);
-            model.addAttribute("team", teamFromForm); // Devolve o objeto com erros para a view com o nome correto
+            model.addAttribute("team", teamFromForm);
             return "team-edit";
         }
 

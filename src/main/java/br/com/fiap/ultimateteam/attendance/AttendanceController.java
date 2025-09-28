@@ -35,13 +35,11 @@ public class AttendanceController {
             model.addAttribute("trainings", gridData.get("trainings"));
             model.addAttribute("attendanceMap", gridData.get("attendanceMap"));
 
-            // 💡 CORREÇÃO: Prepara o mapa de status para ser usado pelo JavaScript no template.
             Map<String, String> statusDescriptions = new HashMap<>();
             for (AttendanceStatus status : AttendanceStatus.values()) {
                 statusDescriptions.put(status.name(), status.getDescription());
             }
             model.addAttribute("statusDescriptions", statusDescriptions);
-            // --------------------------------------------------------------------------
 
             return "attendance-grid";
         }

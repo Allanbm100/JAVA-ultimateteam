@@ -41,7 +41,6 @@ public class AttendanceService {
         for (Attendance attendance : attendances) {
             Long playerId = attendance.getPlayer().getId();
 
-            // Adiciona a verificação para garantir que o jogador está no time atual
             if (attendanceMap.containsKey(playerId)) {
                 attendanceMap.get(playerId)
                         .put(attendance.getTraining().getId(), attendance);

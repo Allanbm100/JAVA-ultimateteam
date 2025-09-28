@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "app_user") // "user" is a reserved keyword in some databases
+@Table(name = "app_user")
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

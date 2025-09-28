@@ -11,7 +11,7 @@ import org.springframework.security.web.access.intercept.AuthorizationFilter;
 public class SecurityConfiguration {
 
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
-    private final TeamRequiredFilter teamRequiredFilter; // 1. Filtro injetado
+    private final TeamRequiredFilter teamRequiredFilter;
 
     public SecurityConfiguration(AuthenticationSuccessHandler authenticationSuccessHandler, TeamRequiredFilter teamRequiredFilter) {
         this.authenticationSuccessHandler = authenticationSuccessHandler;
@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")
                 )
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**")) // Desabilita CSRF para a API
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
                 .addFilterBefore(teamRequiredFilter, AuthorizationFilter.class)
                 .build();
     }

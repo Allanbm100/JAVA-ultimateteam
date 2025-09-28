@@ -22,18 +22,17 @@ public class UserService {
 
         User user = userRepository.findByEmail(email).orElse(new User());
 
-        // Set or update user details
         user.setEmail(email);
 
         String name = principal.getAttribute("name");
         if (name == null) {
-            name = principal.getAttribute("login"); // Fallback for GitHub
+            name = principal.getAttribute("login");
         }
         user.setName(name);
 
-        String avatarUrl = principal.getAttribute("picture"); // From Google
+        String avatarUrl = principal.getAttribute("picture");
         if (avatarUrl == null) {
-            avatarUrl = principal.getAttribute("avatar_url"); // From GitHub
+            avatarUrl = principal.getAttribute("avatar_url");
         }
         user.setAvatarUrl(avatarUrl);
 

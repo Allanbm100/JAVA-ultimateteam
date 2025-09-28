@@ -31,7 +31,7 @@ public class Team {
 
     @URL(message = "{team.logoUrl.url}")
     @NotBlank(message = "{team.logoUrl.notblank}")
-    private String logoUrl; // Corrigido de volta para logoUrl
+    private String logoUrl;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull(message = "{team.creationDate.notnull}")
