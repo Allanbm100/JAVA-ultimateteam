@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <div th:fragment="navbar" class="navbar shadow-sm py-3" style="background-color: oklch(18% 0.006 56.043);"
-     xmlns:th="http://www.w3.org/1999/xhtml">
+     xmlns:th="http://www.thymeleaf.org">
     <div class="navbar-start">
 
         <div class="dropdown">
@@ -9,12 +10,12 @@
                 </svg>
             </div>
             <ul
-                tabindex="0"
-                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    tabindex="0"
+                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
             </ul>
         </div>
 
-        <a class="btn btn-ghost text-xl text-white ml-4 capitalize" th:href="@{/}" th:text="${team?.name} ? ${team.name} : 'Ultimate Team'"></a>
+        <a class="btn btn-ghost text-xl text-white ml-4 capitalize" th:text="${team?.name} ? ${team.name} : 'Ultimate Team'"></a>
     </div>
 
     <div class="navbar-center hidden lg:flex p-4">
@@ -24,7 +25,8 @@
                 <a th:href="@{/player/new}"
                    class="btn btn-outline btn-xs text-base font-extrabold p-0 rounded-none rounded-l-lg btn-primary-add flex items-center justify-center
                           hover:bg-white hover:text-black hover:border-white"
-                   style="height: 100%; width: 2.2rem;">
+                   style="height: 100%; width: 2.2rem;"
+                >
                     +
                 </a>
 
@@ -40,7 +42,8 @@
                 <a th:href="@{/training/new}"
                    class="btn btn-outline btn-xs text-base font-extrabold p-0 rounded-none rounded-l-lg btn-primary-add flex items-center justify-center
                           hover:bg-white hover:text-black hover:border-white"
-                   style="height: 100%; width: 2.2rem;">
+                   style="height: 100%; width: 2.2rem;"
+                >
                     +
                 </a>
 

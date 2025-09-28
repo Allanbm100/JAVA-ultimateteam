@@ -14,6 +14,20 @@
 <main class="min-h-screen flex justify-center pt-8">
     <div th:if="${team}" class="max-w-md mx-auto p-4 text-center">
 
+        <div th:if="${successMessage}" class="alert alert-success shadow-lg mb-4 flex justify-center items-center">
+            <div class="w-full flex justify-center items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span th:text="${successMessage}"></span>
+            </div>
+        </div>
+
+        <div th:if="${errorMessage}" class="alert alert-error shadow-lg mb-4 flex justify-center items-center">
+            <div class="w-full flex justify-center items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span th:text="${errorMessage}"></span>
+            </div>
+        </div>
+
         <div class="avatar">
             <div class="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2 mb-4">
                 <img th:src="${team.logoUrl}" alt="Team Logo" class="w-full h-full rounded-full" />
@@ -50,7 +64,9 @@
                 </div>
             </div>
         </div>
-        <a th:href="@{'/team/' + ${team.id}}" class="btn btn-outline btn-primary py-6 px-16 text-lg uppercase" th:text="#{team.profile.edit-button}"></a>    </div>
+        <a th:href="@{'/team/' + ${team.id}}" class="btn btn-outline btn-primary py-6 px-16 text-lg uppercase" th:text="#{team.profile.edit-button}"></a>
+    </div>
 </main>
+<div th:insert="~{_scripts :: flash-messages-script}"></div>
 </body>
 </html>

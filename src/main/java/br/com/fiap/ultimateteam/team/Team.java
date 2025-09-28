@@ -1,6 +1,7 @@
 package br.com.fiap.ultimateteam.team;
 
 import br.com.fiap.ultimateteam.player.Player;
+import br.com.fiap.ultimateteam.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +13,6 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-
 import java.util.Set;
 
 @Entity
@@ -31,7 +31,7 @@ public class Team {
 
     @URL(message = "{team.logoUrl.url}")
     @NotBlank(message = "{team.logoUrl.notblank}")
-    private String logoUrl;
+    private String logoUrl; // Corrigido de volta para logoUrl
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull(message = "{team.creationDate.notnull}")
@@ -52,12 +52,6 @@ public class Team {
     @NotNull(message = "{team.category.notnull}")
     private Category category;
 
-    @NotBlank(message = "{team.primaryColor.notblank}")
-    private String primaryColor;
-
-    @NotBlank(message = "{team.secondaryColor.notblank}")
-    private String secondaryColor;
-
     @ManyToMany
     @JoinTable(
             name = "team_player",
@@ -65,4 +59,8 @@ public class Team {
             inverseJoinColumns = @JoinColumn(name = "player_id")
     )
     private Set<Player> players;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

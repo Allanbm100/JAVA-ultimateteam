@@ -97,74 +97,84 @@
 
         <h1 class="text-6xl font-bold mb-8 text-center uppercase" th:text="#{attendance.grid.title}"></h1>
 
-        <div class="mb-6">
-            <input type="text" id="filter-player-name" onkeyup="filterPlayerNames()"
-                   th:placeholder="#{attendance.grid.filter.placeholder}"
-                   class="input input-bordered w-full max-w-xs bg-base-100 text-base-content capitalize" />
-        </div>
-        <div class="overflow-x-auto w-full">
-            <div class="inline-block min-w-max">
-                <table class="table table-pin-rows" id="attendance-table">
-                    <thead>
-                    <tr>
-                        <th class="text-center text-lg font-bold w-48 py-2 bg-base-300 border-r border-base-content/20 sortable" onclick="sortTable(0)">
-                            <div class="flex items-center justify-center whitespace-nowrap uppercase">
-                                <span th:text="#{attendance.grid.column.player}"></span> <span class="sort-icon" id="sort-arrow-0"></span>
-                            </div>
-                        </th>
-
-                        <th th:each="training, stat : ${trainings}"
-                            th:id="'header-' + ${stat.index + 1}"
-                            class="text-center w-28 py-2 border-base-content/20 bg-base-300 sortable"
-                            th:classappend="${!stat.last} ? 'border-r' : ''"
-                            th:onclick="'sortTable(' + (${stat.index + 1}) + ')'">
-
-                            <div class="flex items-center justify-center h-full whitespace-nowrap">
-
-                                <div class="flex flex-col items-center">
-                                    <span class="block text-sm font-extrabold" th:text="${#temporals.format(training.date, 'dd/MM')}"></span>
-                                    <span class="block text-xs" th:text="${training.location}"></span>
+        <div th:if="${not #lists.isEmpty(players) and not #lists.isEmpty(trainings)}">
+            <div class="mb-6">
+                <input type="text" id="filter-player-name" onkeyup="filterPlayerNames()"
+                       th:placeholder="#{attendance.grid.filter.placeholder}"
+                       class="input input-bordered w-full max-w-xs bg-base-100 text-base-content capitalize" />
+            </div>
+            <div class="overflow-x-auto w-full">
+                <div class="inline-block min-w-max">
+                    <table class="table table-pin-rows" id="attendance-table">
+                        <thead>
+                        <tr>
+                            <th class="text-center text-lg font-bold w-48 py-2 bg-base-300 border-r border-base-content/20 sortable" onclick="sortTable(0)">
+                                <div class="flex items-center justify-center whitespace-nowrap uppercase">
+                                    <span th:text="#{attendance.grid.column.player}"></span> <span class="sort-icon" id="sort-arrow-0"></span>
                                 </div>
+                            </th>
 
-                                <span class="sort-icon ml-1" th:id="'sort-arrow-' + ${stat.index + 1}"></span>
-                            </div>
-                        </th>
-                    </tr>
-                    </thead>
+                            <th th:each="training, stat : ${trainings}"
+                                th:id="'header-' + ${stat.index + 1}"
+                                class="text-center w-28 py-2 border-base-content/20 bg-base-300 sortable"
+                                th:classappend="${!stat.last} ? 'border-r' : ''"
+                                th:onclick="'sortTable(' + (${stat.index + 1}) + ')'">
 
-                    <tbody>
-                    <tr th:each="player : ${players}">
+                                <div class="flex items-center justify-center h-full whitespace-nowrap">
 
-                        <td th:text="${player.name}" class="sticky left-0 bg-base-100 font-semibold z-10 border-r border-base-content/20 h-12 flex items-center justify-center"></td>
+                                    <div class="flex flex-col items-center">
+                                        <span class="block text-sm font-extrabold" th:text="${#temporals.format(training.date, 'dd/MM')}"></span>
+                                        <span class="block text-xs" th:text="${training.location}"></span>
+                                    </div>
 
-                        <td th:each="training : ${trainings}" class="text-center p-0 border-l border-base-content/20">
-
-                            <div th:with="attendance=${attendanceMap.get(player.id)?.get(training.id)}">
-
-                                <div th:if="${attendance}"
-                                     th:attr="data-player-id=${player.id},
-                                          data-training-id=${training.id},
-                                          data-current-status=${attendance.status}"
-                                     th:text="${statusDescriptions.get(attendance.status.name())}"
-                                     th:classappend="'status-' + ${attendance.status}"
-                                     class="editable-cell h-12 w-full !h-full flex items-center justify-center text-xs font-semibold transition-colors duration-150">
+                                    <span class="sort-icon ml-1" th:id="'sort-arrow-' + ${stat.index + 1}"></span>
                                 </div>
+                            </th>
+                        </tr>
+                        </thead>
 
-                                <div th:unless="${attendance}"
-                                     th:attr="data-player-id=${player.id},
+                        <tbody>
+                        <tr th:each="player : ${players}">
+
+                            <td th:text="${player.name}" class="sticky left-0 bg-base-100 font-semibold z-10 border-r border-base-content/20 h-12 flex items-center justify-center"></td>
+
+                            <td th:each="training : ${trainings}" class="text-center p-0 border-l border-base-content/20">
+
+                                <div th:with="attendance=${attendanceMap.get(player.id)?.get(training.id)}">
+
+                                    <div th:if="${attendance}"
+                                         th:attr="data-player-id=${player.id},
+                                                  data-training-id=${training.id},
+                                                  data-current-status=${attendance.status}"
+                                         th:classappend="'status-' + ${attendance.status}"
+                                         class="editable-cell h-12 w-full !h-full flex items-center justify-center text-xs font-semibold transition-colors duration-150">
+                                        <th:block th:switch="${attendance.status.name()}">
+                                            <span th:case="'PRESENTE'" th:text="#{attendance.grid.status.present}"></span>
+                                            <span th:case="'AUSENTE'" th:text="#{attendance.grid.status.absent}"></span>
+                                            <span th:case="'NAO_ERA'" th:text="#{attendance.grid.status.not-applicable}"></span>
+                                            <span th:case="*" th:text="#{attendance.grid.status.undefined}"></span>
+                                        </th:block>
+                                    </div>
+
+                                    <div th:unless="${attendance}"
+                                         th:attr="data-player-id=${player.id},
                                           data-training-id=${training.id},
                                           data-current-status='INDEFINIDO'"
-                                     th:text="${statusDescriptions.get('INDEFINIDO')}"
-                                     th:classappend="'status-INDEFINIDO'"
-                                     class="editable-cell h-12 w-full !h-full flex items-center justify-center text-xs font-semibold transition-colors duration-150">
-                                </div>
+                                         th:text="#{attendance.grid.status.undefined}"
+                                         th:classappend="'status-INDEFINIDO'"
+                                         class="editable-cell h-12 w-full !h-full flex items-center justify-center text-xs font-semibold transition-colors duration-150">
+                                    </div>
 
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
+        <div th:if="${#lists.isEmpty(players) or #lists.isEmpty(trainings)}" class="text-center p-8">
+            <h2 class="text-2xl font-bold">Nenhum dado para ser mostrado</h2>
         </div>
     </div>
 </main>
@@ -224,17 +234,19 @@
             },
             body: JSON.stringify(payload)
         })
-            .then(response => {
-                if (!response.ok) {
-                    alert('Erro ao salvar presença. Tente novamente.');
+        .then(response => {
+            if (!response.ok) {
+                response.text().then(text => {
+                    alert('Erro: ' + text);
                     revertCell(cellElement);
-                }
-            })
-            .catch(error => {
-                console.error('Erro na rede:', error);
-                alert('Erro de conexão ao salvar presença.');
-                revertCell(cellElement);
-            });
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erro na rede:', error);
+            alert('Erro de conexão ao salvar presença.');
+            revertCell(cellElement);
+        });
     }
 
     function revertCell(cellElement) {

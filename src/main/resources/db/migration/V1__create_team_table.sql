@@ -8,10 +8,5 @@ CREATE TABLE team
     training_time       VARCHAR(15),
     training_location   VARCHAR(255),
     category            VARCHAR(10) NOT NULL,
-    primary_color       VARCHAR(7)  NOT NULL,
-    secondary_color     VARCHAR(7),
     CONSTRAINT pk_team  PRIMARY KEY (id)
 );
-
-INSERT INTO team (id, name, logo_url, creation_date, training_day, training_time, training_location, category, primary_color, secondary_color)
-VALUES (1, 'Teen Spirit', 'https://img.daisyui.com/images/profile/demo/batperson@192.webp', '2018-03-16', 'Sábado', '13:45 - 16:00', 'Caquizal', 'MIXED', '#f1af09', '#000000');

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="halloween" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{logout.title}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<main class="min-h-screen flex items-center justify-center p-4 bg-base-100">
+    <div class="card w-96 bg-base-200 shadow-xl">
+        <div class="card-body items-center text-center">
+            <h1 class="card-title text-3xl font-bold" th:text="#{logout.title}"></h1>
+            <p class="py-4" th:text="#{logout.instruction}"></p>
+            <div class="card-actions">
+                <a href="/login" class="btn btn-primary" th:text="#{logout.button.relogin}"></a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

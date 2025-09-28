@@ -13,7 +13,26 @@
 <main class="min-h-screen flex justify-center pt-8">
     <div class="max-w-md mx-auto p-4">
 
-        <h1 class="text-6xl font-bold mb-8 text-center uppercase" th:text="#{training.form.new.title}"></h1>
+        <div th:if="${successMessage}" class="alert alert-success shadow-lg mb-4">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span th:text="${successMessage}"></span>
+            </div>
+        </div>
+
+        <div th:if="${errorMessage}" class="alert alert-error shadow-lg mb-4">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span th:text="${errorMessage}"></span>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center mb-8">
+            <a href="javascript:history.back()" class="btn btn-circle btn-sm btn-ghost">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            </a>
+            <h1 class="text-6xl font-bold text-center uppercase mt-2" th:text="#{training.form.new.title}"></h1>
+        </div>
 
         <form th:action="@{/training/save}" th:object="${training}" method="post" class="flex flex-col gap-4">
             <input type="hidden" th:field="*{id}" />
@@ -24,9 +43,10 @@
                 </label>
                 <input type="date" th:field="*{date}"
                        class="input input-bordered w-full"
-                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('date')}">
-                <span class="label-text-alt text-error" th:errors="*{date}" th:text="#{player.form.validation.error}"></span>
-            </label>
+                       th:errorclass="input-error" />
+                <label class="label" th:if="${#fields.hasErrors('date')}">
+                    <span class="label-text-alt text-error" th:errors="*{date}"></span>
+                </label>
             </div>
 
             <div class="form-control w-full">
@@ -35,9 +55,10 @@
                 </label>
                 <input type="time" th:field="*{startTime}"
                        class="input input-bordered w-full"
-                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('startTime')}">
-                <span class="label-text-alt text-error" th:errors="*{startTime}" th:text="#{player.form.validation.error}"></span>
-            </label>
+                       th:errorclass="input-error" />
+                <label class="label" th:if="${#fields.hasErrors('startTime')}">
+                    <span class="label-text-alt text-error" th:errors="*{startTime}"></span>
+                </label>
             </div>
 
             <div class="form-control w-full">
@@ -46,9 +67,10 @@
                 </label>
                 <input type="number" th:field="*{durationMinutes}" th:placeholder="#{training.form.duration.placeholder}"
                        class="input input-bordered w-full capitalize" min="10"
-                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('durationMinutes')}">
-                <span class="label-text-alt text-error" th:errors="*{durationMinutes}" th:text="#{player.form.validation.error}"></span>
-            </label>
+                       th:errorclass="input-error" />
+                <label class="label" th:if="${#fields.hasErrors('durationMinutes')}">
+                    <span class="label-text-alt text-error" th:errors="*{durationMinutes}"></span>
+                </label>
             </div>
 
             <div class="form-control w-full">
@@ -57,14 +79,28 @@
                 </label>
                 <input type="text" th:field="*{location}" th:placeholder="#{training.form.location.placeholder}"
                        class="input input-bordered w-full capitalize"
-                       th:errorclass="input-error" /> <label class="label" th:if="${#fields.hasErrors('location')}">
-                <span class="label-text-alt text-error" th:errors="*{location}" th:text="#{player.form.validation.error}"></span>
-            </label>
+                       th:errorclass="input-error" />
+                <label class="label" th:if="${#fields.hasErrors('location')}">
+                    <span class="label-text-alt text-error" th:errors="*{location}"></span>
+                </label>
+            </div>
+
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="text-sm font-extrabold tracking-wider uppercase" style="color: oklch(0.3506 0.006 56.043);" th:text="#{training.form.label.description}"></span>
+                </label>
+                <textarea th:field="*{description}" th:placeholder="#{training.form.description.placeholder}"
+                          class="textarea textarea-bordered w-full capitalize"
+                          th:errorclass="textarea-error"></textarea>
+                <label class="label" th:if="${#fields.hasErrors('description')}">
+                    <span class="label-text-alt text-error" th:errors="*{description}"></span>
+                </label>
             </div>
 
             <button type="submit" class="btn btn-outline btn-primary mt-6 uppercase btn-block" th:text="#{training.form.save-button}"></button>
         </form>
     </div>
+    <div th:insert="~{_scripts :: flash-messages-script}"></div>
 </main>
 </body>
 </html>

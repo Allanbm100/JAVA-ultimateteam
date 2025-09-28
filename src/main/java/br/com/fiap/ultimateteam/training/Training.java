@@ -43,6 +43,5 @@ public class Training {
 
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
-    @NotNull
     private Team team;
 }
